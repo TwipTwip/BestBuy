@@ -112,7 +112,6 @@ class LimitedProduct(Product):
         if quantity > self.maximum:
             raise Exception("Sorry, item limited to one per order")
         else:
-            self.total += 1
             total = self.price
             self.quantity = self.quantity - 1
             total = float(total)
