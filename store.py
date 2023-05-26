@@ -30,13 +30,21 @@ class Store:
             else:
                 counter += 1
                 if product.is_active() is True:
-                    if product.quantity == product.price:
-                        list_of_items.append(f"{counter}. {product.name}, Price: ${product.price} Quantity: Unlimited")
-                        list_of_active_products.append(product)
+                    if product.promotion is not None:
+                        if product.quantity == 0:
+                            list_of_items.append(f"{counter}. {product.name}, Price: ${product.price} Quantity: Unlimited, Promotion: {product.name_of_promotion()}")
+                            list_of_active_products.append(product)
+                        else:
+                            list_of_items.append(f"{counter}. {product.name}, Price: ${product.price} Quantity: {product.quantity}, Promotion: {product.name_of_promotion()}")
+                            list_of_active_products.append(product)
                     else:
-                        list_of_items.append(
-                            f"{counter}. {product.name}, Price: ${product.price} Quantity: {product.quantity}")
-                        list_of_active_products.append(product)
+                        if product.quantity == product.price:
+                            list_of_items.append(f"{counter}. {product.name}, Price: ${product.price} Quantity: Unlimited")
+                            list_of_active_products.append(product)
+                        else:
+                            list_of_items.append(
+                                f"{counter}. {product.name}, Price: ${product.price} Quantity: {product.quantity}")
+                            list_of_active_products.append(product)
         return list_of_active_products, list_of_items
 
     def order(self, shopping_list):
