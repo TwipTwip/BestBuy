@@ -4,11 +4,13 @@ from BestBuy.products import Product
 
 
 def test_creating_prod():
-    assert Product("Item", 50, 1000)
+    prod = Product("Item", 50, 1000)
+    assert prod.is_active() is True
 
 
 def test_creating_prod_invalid_details():
-    assert Product(50, 100)
+    with pytest.raises(TypeError):
+        assert Product(50, 100) is TypeError
 
 
 def test_prod_becomes_invalid():
@@ -24,4 +26,8 @@ def test_buy_modifies_quantity():
 
 def test_buy_too_much():
     thing = Product("Item4", 50, 100)
-    assert thing.buy(101)
+    with pytest.raises(AssertionError):
+        thing.buy(101)
+
+
+pytest.main()

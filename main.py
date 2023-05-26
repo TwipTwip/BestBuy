@@ -54,17 +54,19 @@ def shopping_list(best_buy):
             return best_buy.order(shopping_list)
         else:
             quantity_to_buy = int(quantity_to_buy)
-        shopping_item = options[product_choice - 1]
-        item_name = shopping_item.name
-        item_to_buy = (shopping_item, quantity_to_buy)
-        shopping_list.append(item_to_buy)
+            shopping_item = options[product_choice - 1]
+            item_name = shopping_item
+            item_to_buy = (item_name, quantity_to_buy)
+            shopping_list.append(item_to_buy)
 
 
 def main():
     # setup initial stock of inventory
     product_list = [products.Product("MacBook Air M2", price=1450, quantity=100),
                     products.Product("Bose QuietComfort Earbuds", price=250, quantity=500),
-                    products.Product("Google Pixel 7", price=500, quantity=250)
+                    products.Product("Google Pixel 7", price=500, quantity=250),
+                    products.NonStockedProduct("Windows License", price=125),
+                    products.LimitedProduct("Shipping", price=10, quantity=250, maximum=1)
                     ]
     best_buy = store.Store(product_list)
     start(best_buy)
